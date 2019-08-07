@@ -116,7 +116,8 @@ System.register(['lodash', 'moment'], function (_export, _context) {
             var params = {
               program: this.program,
               start: this.startTime,
-              resolution: this.intervalMs
+              resolution: this.intervalMs,
+              compress: false
             };
             if (!this.unbounded) {
               params['stop'] = this.stopTime;
@@ -124,9 +125,7 @@ System.register(['lodash', 'moment'], function (_export, _context) {
             }
             if (this.maxDelay) params['maxDelay'] = this.maxDelay;
 
-            // if (this.maxDataPoints)
-            params['sampleSize'] = 100;
-            params['compress'] = false;
+            if (this.maxDataPoints) params['sampleSize'] = this.maxDataPoints;
 
             this.handle = this.signalflow.execute(params);
             this.running = true;
