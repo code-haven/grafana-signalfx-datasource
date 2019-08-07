@@ -107,10 +107,9 @@ System.register(['lodash', './signalfx', './stream_handler'], function (_export,
         }, {
           key: 'getMaxDelay',
           value: function getMaxDelay(options) {
-            var target = _.max(options.targets, function (t) {
+            return _.max(_.map(options.targets, function (t) {
               return t.maxDelay;
-            });
-            if (target) return target.maxDelay;
+            }));
           }
         }, {
           key: 'extractLabelsWithAlias',

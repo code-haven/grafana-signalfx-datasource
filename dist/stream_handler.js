@@ -116,7 +116,8 @@ System.register(['lodash', 'moment'], function (_export, _context) {
             var params = {
               program: this.program,
               start: this.startTime,
-              resolution: this.intervalMs
+              resolution: this.intervalMs,
+              immediate: true
             };
             if (!this.unbounded) {
               params['stop'] = this.stopTime;

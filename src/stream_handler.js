@@ -77,6 +77,7 @@ export class StreamHandler {
       program: this.program,
       start: this.startTime,
       resolution: this.intervalMs,
+      immediate: true
     };
     if (!this.unbounded) {
       params['stop'] = this.stopTime;
