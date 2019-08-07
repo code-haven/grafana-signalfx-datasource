@@ -126,6 +126,7 @@ System.register(['lodash', 'moment'], function (_export, _context) {
 
             // if (this.maxDataPoints)
             params['sampleSize'] = 100;
+            params['compress'] = false;
 
             this.handle = this.signalflow.execute(params);
             this.running = true;

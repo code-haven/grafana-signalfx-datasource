@@ -87,6 +87,7 @@ export class StreamHandler {
     
     // if (this.maxDataPoints)
     params['sampleSize'] = 100
+    params['compress'] = false
 
     this.handle = this.signalflow.execute(params);
     this.running = true;
