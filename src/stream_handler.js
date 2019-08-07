@@ -80,6 +80,7 @@ export class StreamHandler {
       compress: false,
       disableAllEventPublishes: true,
       offsetByMaxDelay: true,
+      immediate: true
     };
     if (!this.unbounded) {
       params['stop'] = this.stopTime;

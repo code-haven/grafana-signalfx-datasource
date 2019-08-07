@@ -119,7 +119,8 @@ System.register(['lodash', 'moment'], function (_export, _context) {
               resolution: this.intervalMs,
               compress: false,
               disableAllEventPublishes: true,
-              offsetByMaxDelay: true
+              offsetByMaxDelay: true,
+              immediate: true
             };
             if (!this.unbounded) {
               params['stop'] = this.stopTime;
