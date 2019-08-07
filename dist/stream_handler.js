@@ -124,7 +124,8 @@ System.register(['lodash', 'moment'], function (_export, _context) {
             }
             if (this.maxDelay) params['maxDelay'] = this.maxDelay;
 
-            if (this.maxDataPoints) params['sampleSize'] = this.maxDataPoints;
+            // if (this.maxDataPoints)
+            params['sampleSize'] = 100;
 
             this.handle = this.signalflow.execute(params);
             this.running = true;
