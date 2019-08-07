@@ -77,7 +77,9 @@ export class StreamHandler {
       program: this.program,
       start: this.startTime,
       resolution: this.intervalMs,
-      compress: false
+      compress: false,
+      disableAllEventPublishes: true,
+      offsetByMaxDelay: true,
     };
     if (!this.unbounded) {
       params['stop'] = this.stopTime;
@@ -162,6 +164,7 @@ export class StreamHandler {
   }
 
   flushData() {
+    console.log('Flushing');
     this.unboundedBatchPhase = false;
     var seriesList = [];
     var minTime = 0;

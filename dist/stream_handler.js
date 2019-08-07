@@ -117,7 +117,9 @@ System.register(['lodash', 'moment'], function (_export, _context) {
               program: this.program,
               start: this.startTime,
               resolution: this.intervalMs,
-              compress: false
+              compress: false,
+              disableAllEventPublishes: true,
+              offsetByMaxDelay: true
             };
             if (!this.unbounded) {
               params['stop'] = this.stopTime;
@@ -209,6 +211,7 @@ System.register(['lodash', 'moment'], function (_export, _context) {
         }, {
           key: 'flushData',
           value: function flushData() {
+            console.log('Flushing');
             this.unboundedBatchPhase = false;
             var seriesList = [];
             var minTime = 0;
