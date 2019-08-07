@@ -84,6 +84,10 @@ export class StreamHandler {
     }
     if (this.maxDelay)
       params['maxDelay'] = this.maxDelay;
+    
+    if (this.maxDataPoints)
+      params['sampleSize'] = this.maxDataPoints;
+
     this.handle = this.signalflow.execute(params);
     this.running = true;
     this.handle.stream(this.handleData.bind(this));

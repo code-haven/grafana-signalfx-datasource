@@ -55,9 +55,28 @@ export class SignalFxDatasource {
       .flatMap(t => this.extractLabelsWithAlias(t.program, t.alias)));
   }
 
+  // getMaximumOption(options, name) {
+  //   return _.max(_.map(options.targets, t => t[name]));
+  // }
+
   getMaxDelay(options) {
     return _.max(_.map(options.targets, t => t.maxDelay));
   }
+
+  // getMinimumResolution(options) {
+    
+  // }
+
+  // getSamplingParameters(options) {
+
+  // }
+
+  // getAdditionalProgramParameters(options) {
+  //   return {
+  //     maxDelay: self.getMaximumOption(options, 'maxDelay'),
+  //     maxDelay: self.getMaximumOption(options, 'maxDelay'),
+  //   }    
+  // }
 
   extractLabelsWithAlias(program, alias) {
     const re = /label\s?=\s?'([\w]*?)'/igm;
