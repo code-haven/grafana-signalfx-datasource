@@ -157,6 +157,8 @@ System.register(['lodash', 'moment'], function (_export, _context) {
           value: function handleData(err, data) {
             var _this2 = this;
 
+            console.log('Handle Data: ' + data);
+
             if (err) {
               console.debug('Stream error', err);
               this.stop();
@@ -187,6 +189,7 @@ System.register(['lodash', 'moment'], function (_export, _context) {
               if (this.batchPhaseFlushTimeout) {
                 clearTimeout(this.batchPhaseFlushTimeout);
               }
+              console.log('Start delayed flush.');
               this.batchPhaseFlushTimeout = setTimeout(function () {
                 return _this2.flushData();
               }, 500);
@@ -211,7 +214,6 @@ System.register(['lodash', 'moment'], function (_export, _context) {
         }, {
           key: 'flushData',
           value: function flushData() {
-            console.log('Flushing');
             this.unboundedBatchPhase = false;
             var seriesList = [];
             var minTime = 0;

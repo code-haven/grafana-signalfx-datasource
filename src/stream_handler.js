@@ -114,6 +114,8 @@ export class StreamHandler {
   }
 
   handleData(err, data) {
+    console.log(`Handle Data: ${data}`);
+    
     if (err) {
       console.debug('Stream error', err);
       this.stop();
@@ -144,6 +146,7 @@ export class StreamHandler {
       if (this.batchPhaseFlushTimeout) {
         clearTimeout(this.batchPhaseFlushTimeout);
       }
+      console.log('Start delayed flush.');
       this.batchPhaseFlushTimeout = setTimeout(() => this.flushData(), 500);
     }
   }
@@ -164,7 +167,6 @@ export class StreamHandler {
   }
 
   flushData() {
-    console.log('Flushing');
     this.unboundedBatchPhase = false;
     var seriesList = [];
     var minTime = 0;
