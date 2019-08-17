@@ -34,7 +34,7 @@ export class SignalFxDatasource {
     var program = queries.join('\n');
 
     const aliases = this.collectAliases(options);
-    const maxDelay = this.getMaxDelay(options);
+    const programOptions = this.getProgramOptions()
 
     // TODO: Better validation can be implemented here 
     if (!program) {
@@ -46,7 +46,7 @@ export class SignalFxDatasource {
       handler = new StreamHandler(this.signalflow, this.templateSrv);
       this.streams[options.panelId] = handler;
     }
-    return handler.start(program, aliases, maxDelay, options);
+    return handler.start(program, aliases, programOptions, options);
   }
 
   collectAliases(options) {
@@ -55,11 +55,19 @@ export class SignalFxDatasource {
       .flatMap(t => this.extractLabelsWithAlias(t.program, t.alias)));
   }
 
-  getMaxDelay(options) {
-    var maxDelay = _.max(_.map(options.targets, t => t.maxDelay));
-    if (!maxDelay)
-      maxDelay = 0;
-    return maxDelay;
+  getMaxOption(options, property, default_value = 0) {
+    var value = _.max(_.map(options.targets, t => t[property]));
+    if (!value)
+      value = default_value;
+    return value;
+  }
+
+  getProgramOptions(options) {
+    return {
+      maxDelay: this.getMaxOption(options, 'maxDelay'),
+      resolutionMs: this.getMaxOption(options, 'resolutionMs'),
+      sampleSize: this.getMaxOption(options, 'sampleSize')
+    }
   }
 
   extractLabelsWithAlias(program, alias) {

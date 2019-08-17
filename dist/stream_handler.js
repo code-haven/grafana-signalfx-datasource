@@ -64,9 +64,9 @@ System.register(['lodash', 'moment'], function (_export, _context) {
 
         _createClass(StreamHandler, [{
           key: 'start',
-          value: function start(program, aliases, maxDelay, options) {
+          value: function start(program, aliases, programOptions, options) {
             this.aliases = aliases;
-            this.maxDelay = maxDelay;
+            this.programOptions = programOptions;
             if (this.isJobReusable(program, options)) {
               if (!this.unboundedBatchPhase) {
                 this.promise = defer();
@@ -122,7 +122,10 @@ System.register(['lodash', 'moment'], function (_export, _context) {
               params['stop'] = this.stopTime;
               params['immediate'] = true;
             }
-            if (this.maxDelay) params['maxDelay'] = this.maxDelay;
+            if (this.programOptions.maxDelay) params['maxDelay'] = this.programOptions.maxDelay;
+            if (this.programOptions.resolutionMs) params['resolution'] = this.programOptions.resolutionMs;
+            if (this.programOptions.sampleSize) params['sampleSize'] = this.programOptions.sampleSize;
+
             this.handle = this.signalflow.execute(params);
             this.running = true;
             this.handle.stream(this.handleData.bind(this));

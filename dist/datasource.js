@@ -77,7 +77,7 @@ System.register(['lodash', './signalfx', './stream_handler'], function (_export,
             var program = queries.join('\n');
 
             var aliases = this.collectAliases(options);
-            var maxDelay = this.getMaxDelay(options);
+            var programOptions = this.getProgramOptions();
 
             // TODO: Better validation can be implemented here 
             if (!program) {
@@ -89,7 +89,7 @@ System.register(['lodash', './signalfx', './stream_handler'], function (_export,
               handler = new StreamHandler(this.signalflow, this.templateSrv);
               this.streams[options.panelId] = handler;
             }
-            return handler.start(program, aliases, maxDelay, options);
+            return handler.start(program, aliases, programOptions, options);
           }
         }, {
           key: 'collectAliases',
@@ -105,12 +105,24 @@ System.register(['lodash', './signalfx', './stream_handler'], function (_export,
             }));
           }
         }, {
-          key: 'getMaxDelay',
-          value: function getMaxDelay(options) {
-            var target = _.max(options.targets, function (t) {
-              return t.maxDelay;
-            });
-            if (target) return target.maxDelay;
+          key: 'getMaxOption',
+          value: function getMaxOption(options, property) {
+            var default_value = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+            var value = _.max(_.map(options.targets, function (t) {
+              return t[property];
+            }));
+            if (!value) value = default_value;
+            return value;
+          }
+        }, {
+          key: 'getProgramOptions',
+          value: function getProgramOptions(options) {
+            return {
+              maxDelay: this.getMaxOption(options, 'maxDelay'),
+              resolutionMs: this.getMaxOption(options, 'resolutionMs'),
+              sampleSize: this.getMaxOption(options, 'sampleSize')
+            };
           }
         }, {
           key: 'extractLabelsWithAlias',
