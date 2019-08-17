@@ -77,7 +77,7 @@ System.register(['lodash', './signalfx', './stream_handler'], function (_export,
             var program = queries.join('\n');
 
             var aliases = this.collectAliases(options);
-            var programOptions = this.getProgramOptions();
+            var programOptions = this.getProgramOptions(options);
 
             // TODO: Better validation can be implemented here 
             if (!program) {

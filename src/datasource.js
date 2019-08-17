@@ -34,7 +34,7 @@ export class SignalFxDatasource {
     var program = queries.join('\n');
 
     const aliases = this.collectAliases(options);
-    const programOptions = this.getProgramOptions()
+    const programOptions = this.getProgramOptions(options);
 
     // TODO: Better validation can be implemented here 
     if (!program) {
