@@ -82,8 +82,10 @@ export class StreamHandler {
       params['stop'] = this.stopTime;
       params['immediate'] = true;
     }
-    if (this.programOptions.maxDelay)
+    if (this.programOptions.maxDelay) {
       params['maxDelay'] = this.programOptions.maxDelay;
+      params['immediate'] = true;
+    } 
     if (this.programOptions.resolutionMs)
       params['resolution'] = this.programOptions.resolutionMs;
     if (this.programOptions.sampleSize)
